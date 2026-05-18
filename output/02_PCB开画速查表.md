@@ -30,7 +30,7 @@
 | J3 | 右电机输出 | KF301-2P 5.08mm | 1 |
 | J4 | 舵机①（水平） | 2.54mm 排针 3P（GND/VCC/SIG） | 1 |
 | J5 | 舵机②（俯仰） | 2.54mm 排针 3P（GND/VCC/SIG） | 1 |
-| J6 | MaixCam 串口 | 2.54mm 排针 4P（GND/VCC/TX/RX） | 1 |
+| J6 | MaixCam 串口 | 2.54mm 排针 3P（GND/RX/TX）| 1 |
 | J7 | 5路循迹模块 | 2.54mm 排针 7P（VCC/GND/OUT1~5） | 1 |
 | J8 | OLED | 2.54mm 排针 4P（GND/VCC/SCL/SDA） | 1 |
 | J9 | 激光模组 | 2.54mm 排针 3P（GND/VCC/SIG） | 1 |
@@ -47,12 +47,13 @@
 | D1 | 绿色LED | 3mm 直插 | 1 |
 | D2 | 红色LED | 3mm 直插 | 1 |
 | D3 | 红色LED | 3mm 直插 | 1 |
-| R1 | 限流电阻 | 1kΩ 0805 贴片 | 1 |
-| R2 | 限流电阻 | 1kΩ 0805 贴片 | 1 |
-| R3 | 限流电阻 | 1kΩ 0805 贴片 | 1 |
-| C1 | 滤波电容 | 100μF/25V 电解 直插 Φ6.3×11mm | 1 |
-| C2 | 滤波电容 | 100μF/25V 电解 直插 | 1 |
-| C3~C7 | 去耦电容 | 0.1μF 0603 贴片 | 5 |
+| R1 | 限流电阻 | 1kΩ 1/4W 直插 | 1 |
+| R2 | 限流电阻 | 1kΩ 1/4W 直插 | 1 |
+| R3 | 限流电阻 | 1kΩ 1/4W 直插 | 1 |
+| R4 | 栅极电阻 | 1kΩ 1/4W 直插 | 1 |
+| R5 | 下拉电阻 | 10kΩ 1/4W 直插 | 1 |
+| C1 | 滤波电容 | 100μF/25V 电解 直插 Φ6.3 | 1 |
+| C3~C7 | 去耦电容 | 0.1μF (104) 独石 直插 | 5 |
 
 ---
 
@@ -82,7 +83,7 @@ SW3(NO脚) → VCC_AIM节点
 VCC_AIM → R3 → D3(+) → D3(-) → GND  [红LED瞄准路指示]
 VCC_AIM → J4(VCC)       舵机①供电
 VCC_AIM → J5(VCC)       舵机②供电
-VCC_AIM → J6(VCC)       MaixCam供电
+
 VCC_AIM → J9(VCC)       激光供电
 VCC_AIM → C4(+) → GND  去耦
 
@@ -131,10 +132,10 @@ J9: Pin1=GND / Pin2=VCC_AIM / Pin3=SIG
 ### C8T6 ↔ MaixCam（UART）
 
 ```
-U1(PA9/TX)  → J6(Pin4/RX)   C8T6发 → MaixCam收
+U1(PA9/TX)  → J6(Pin2/RX)   C8T6发 → MaixCam收
 U1(PA10/RX) → J6(Pin3/TX)   C8T6收 ← MaixCam发
-J6: Pin1=GND / Pin2=VCC_AIM / Pin3=TX / Pin4=RX
-注意：PCB上丝印TX/RX是站C8T6视角标的
+J6: Pin1=GND / Pin2=RX / Pin3=TX（1×3P）
+注意：丝印TX/RX站C8T6视角
 ```
 
 ### C8T6 → 5路循迹
